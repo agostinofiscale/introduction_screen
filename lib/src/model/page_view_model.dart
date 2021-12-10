@@ -31,6 +31,8 @@ class PageViewModel {
   /// Wrap content in scrollView
   final bool useScrollView;
 
+  final Widget? raw;
+
   PageViewModel({
     this.title,
     this.titleWidget,
@@ -41,20 +43,21 @@ class PageViewModel {
     this.reverse =  false,
     this.decoration = const PageDecoration(),
     this.useScrollView = true,
+    this.raw
   })  : assert(
-          title != null || titleWidget != null,
-          "You must provide either title (String) or titleWidget (Widget).",
+          title != null || titleWidget != null || raw != null,
+          "You must provide either title (String), titleWidget (Widget) or raw content.",
         ),
         assert(
-          (title == null) != (titleWidget == null),
+          (title == null) != (titleWidget == null) || raw != null, 
           "You can not provide both title and titleWidget.",
         ),
         assert(
-          body != null || bodyWidget != null,
-          "You must provide either body (String) or bodyWidget (Widget).",
+          body != null || bodyWidget != null || raw != null,
+          "You must provide either body (String), bodyWidget (Widget) or raw content",
         ),
         assert(
-          (body == null) != (bodyWidget == null),
+          (body == null) != (bodyWidget == null) || raw != null,
           "You can not provide both body and bodyWidget.",
         );
 }
