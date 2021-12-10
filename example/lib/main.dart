@@ -158,6 +158,11 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           image: _buildImage('img1.jpg'),
           reverse: true,
         ),
+        PageViewModel(
+          raw: Center(
+            child: Text("Hi, i'm a raw page!"),
+          )
+        )
       ],
       onDone: () => _onIntroEnd(context),
       //onSkip: () => _onIntroEnd(context), // You can override onSkip callback

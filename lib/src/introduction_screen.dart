@@ -12,9 +12,6 @@ class IntroductionScreen extends StatefulWidget {
   /// All pages of the onboarding
   final List<PageViewModel>? pages;
 
-  /// All pages of the onboarding, as a complete widget instead of a PageViewModel
-  final List<Widget>? rawPages;
-
   /// Callback when Done button is pressed
   final VoidCallback? onDone;
 
@@ -162,7 +159,6 @@ class IntroductionScreen extends StatefulWidget {
   const IntroductionScreen({
     Key? key,
     this.pages,
-    this.rawPages,
     this.onDone,
     this.done,
     this.onSkip,
@@ -198,12 +194,7 @@ class IntroductionScreen extends StatefulWidget {
     this.pagesAxis = Axis.horizontal,
     this.scrollPhysics = const BouncingScrollPhysics(),
     this.rtl = false,
-  })  : assert(pages != null || rawPages != null),
-        assert(
-          (pages != null && pages.length > 0) ||
-              (rawPages != null && rawPages.length > 0),
-          "You provide at least one page on introduction screen !",
-        ),
+  })  : assert(pages != null),
         assert(!showDoneButton || (done != null && onDone != null)),
         assert((showSkipButton && skip != null) || !showSkipButton),
         assert((showNextButton && next != null) || !showNextButton),
@@ -232,7 +223,7 @@ class IntroductionScreenState extends State<IntroductionScreen> {
   }
 
   int getPagesLength() {
-    return (widget.pages ?? widget.rawPages!).length;
+    return widget.pages!.length;
   }
 
   void next() => animateScroll(_currentPage.round() + 1);
@@ -321,16 +312,15 @@ class IntroductionScreenState extends State<IntroductionScreen> {
                 physics: widget.freeze
                     ? const NeverScrollableScrollPhysics()
                     : widget.scrollPhysics,
-                children: widget.pages != null
-                    ? widget.pages!
-                        .map((p) => IntroPage(
+                children: widget.pages!
+                        .map((p) =>
+                          IntroPage(
                               page: p,
                               scrollController: widget.scrollController,
                               isTopSafeArea: widget.isTopSafeArea,
                               isBottomSafeArea: widget.isBottomSafeArea,
-                            ))
-                        .toList()
-                    : widget.rawPages!,
+                            )
+                      ).toList()
               ),
             ),
           ),

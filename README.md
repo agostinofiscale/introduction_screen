@@ -198,8 +198,6 @@ Many parameters can be used to customized Intro like you want !
 This is all parameters you can add :
 
 - Page that will be display (`PageViewModel`), by adding `pages: [..]` parameter.
-- Use your own pages (Widget) without using those predefined, by adding `rawPages: [..]` parameter.
-  - If you provide both `rawPages` and `pages` parameter, `pages` will be used.
 - Set a custom callback when done button is pressed, by adding `onDone: () {}` parameter.
   - This param is required, except if you set `showDoneButton: false`
 - Define Done button (Widget), by adding `done: Text('Done')`
