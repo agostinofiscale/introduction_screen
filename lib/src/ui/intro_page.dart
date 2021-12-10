@@ -109,7 +109,7 @@ class _IntroPageState extends State<IntroPage>
     return SafeArea(
       top: widget.isTopSafeArea,
       bottom: widget.isBottomSafeArea,
-      child: _buildFlex(),
+      child: widget.page.raw != null ? widget.page.raw! : _buildFlex(),
     );
   }
 }
